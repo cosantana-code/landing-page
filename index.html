@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOMOREBI & NORD — Architectural Sanctuaries & Tactile Living Objects</title>
+  <!-- Tailwind CSS via allowlisted CDN -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg-washi: #F7F4EE;
+      --bg-surface: #EFEBE1;
+      --bg-card: #FAF8F5;
+      --ink-deep: #1E1D1B;
+      --ink-stone: #5C5850;
+      --ink-muted: #8C877D;
+      --border-delicate: rgba(30, 29, 27, 0.09);
+      --accent-terracotta: #B65B44;
+      --accent-lichen: #4E5D4E;
+      --accent-ochre: #C0864B;
+      --accent-indigo: #3D4A56;
+    }
+
+    body {
+      background-color: var(--bg-washi);
+      color: var(--ink-deep);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      selection-background-color: #E2DBD0;
+    }
+
+    .font-serif-japandi {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* Shoji Screen Subtle Grid Pattern */
+    .shoji-grid {
+      background-image: 
+        linear-gradient(to right, rgba(30, 29, 27, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 29, 27, 0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    /* Organic Wabi-Sabi shapes */
+    .stone-pill {
+      border-radius: 9999px 9999px 9999px 9999px;
+    }
+
+    .organic-contour-1 {
+      border-radius: 60% 40% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    .organic-contour-2 {
+      border-radius: 40% 60% 35% 65% / 60% 35% 65% 40%;
+    }
+
+    /* Tactile shadows & blur */
+    .tactile-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-delicate);
+      box-shadow: 0 4px 20px -2px rgba(30, 29, 27, 0.03), 0 12px 32px -4px rgba(30, 29, 27, 0.02);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tactile-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px -4px rgba(30, 29, 27, 0.07);
+      border-color: rgba(30, 29, 27, 0.16);
+    }
+
+    /* Custom scroll indicator */
+    #scroll-indicator {
+      transform-origin: left;
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Soft pulse for sound player */
+    @keyframes gentle-breath {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+    .animate-breath {
+      animation: gentle-breath 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen antialiased overflow-x-hidden">
+
+  <!-- Top Progress Bar (Shoji Thread) -->
+  <div class="fixed top-0 left-0 right-0 h-[2px] bg-black/5 z-50">
+    <div id="scroll-indicator" class="h-full bg-[#B65B44] w-full scale-x-0 origin-left"></div>
+  </div>
+
+  <!-- Noise Texture Overlay (Washi Paper feeling) -->
+  <div class="fixed inset-0 pointer-events-none opacity-[0.035] z-40 bg-[radial-gradient(#1e1d1b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+  <!-- Ambient Sound Banner & Minimal Header -->
+  <header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-[#F7F4EE]/85 border-b border-black/[0.06] transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-7 h-7 rounded-full border border-stone-800/40 flex items-center justify-center transition-transform duration-500 group-hover:rotate-45">
+          <div class="w-2.5 h-2.5 bg-[#B65B44] rounded-sm"></div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif-japandi text-xl tracking-[0.2em] font-medium uppercase text-stone-900">Komorebi & Nord</span>
+          <span class="text-[9px] tracking-[0.28em] uppercase text-stone-500 font-light">Kyoto — Copenhagen</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 text-xs font-medium tracking-[0.16em] uppercase text-stone-600">
+        <a href="#philosophy" class="hover:text-stone-950 transition-colors">Philosophy</a>
+        <a href="#sanctuaries" class="hover:text-stone-950 transition-colors">Sanctuaries</a>
+        <a href="#objects" class="hover:text-stone-950 transition-colors">Living Objects</a>
+        <a href="#materiality" class="hover:text-stone-950 transition-colors">Materiality</a>
+        <a href="#dialogue" class="hover:text-stone-950 transition-colors">Journal</a>
+      </nav>
+
+      <!-- Action + Zen Audio Generator Toggle -->
+      <div class="flex items-center gap-4">
+        <!-- Interactive Ambient Audio Button -->
+        <button id="audio-toggle-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-stone-300/80 bg-stone-100/60 hover:bg-stone-200/70 text-[11px] tracking-wider text-stone-700 transition-all cursor-pointer" title="Listen to Zen Bamboo & Stream Sound generator">
+          <span class="relative flex h-2 w-2">
+            <span id="audio-beacon" class="hidden absolute inline-flex h-full w-full rounded-full bg-[#4E5D4E] opacity-75 animate-ping"></span>
+            <span id="audio-dot" class="relative inline-flex rounded-full h-2 w-2 bg-stone-400"></span>
+          </span>
+          <span id="audio-status-label" class="font-light">Zen Chime: Off</span>
+        </button>
+
+        <!-- CTA Anchor -->
+        <a href="#inquiry" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-stone-900 text-[#F7F4EE] hover:bg-[#B65B44] text-xs font-normal tracking-[0.15em] uppercase transition-all duration-300 shadow-sm">
+          Inquire
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION: Tranquil Stillness & Emotional Opening -->
+  <section id="hero" class="relative pt-36 pb-24 md:pt-48 md:pb-36 px-6 lg:px-12 shoji-grid overflow-hidden border-b border-black/[0.05]">
+    
+    <!-- Floating Japanese character watermark (Ma / Space) -->
+    <div class="absolute right-4 lg:right-16 top-32 text-[140px] md:text-[220px] font-serif-japandi text-stone-900/[0.03] select-none pointer-events-none leading-none">
+      間
+    </div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      
+      <!-- Subtle Category Pill -->
+      <div class="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[#EFEBE1] border border-stone-300/60 mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#4E5D4E]"></span>
+        <span class="text-[10px] tracking-[0.25em] uppercase text-stone-600 font-medium">Wabi-Sabi Reverence Meets Hygge Comfort</span>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-8">
+          <h1 class="font-serif-japandi text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-light leading-[1.08] tracking-tight text-stone-900">
+            The quiet art of <br>
+            <span class="italic font-normal text-[#B65B44]">living with less</span>, <br>
+            feeling infinitely more.
+          </h1>
+        </div>
+        
+        <div class="lg:col-span-4 pb-2">
+          <p class="text-sm md:text-base text-stone-600 font-light leading-relaxed mb-6">
+            We architect timber retreats and handcraft tactile interior artifacts where Nordic daylight gently marries Japanese stillness. Spaces built not to impress, but to heal.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#sanctuaries" class="px-6 py-3 rounded-full bg-stone-900 hover:bg-[#B65B44] text-[#F7F4EE] text-xs uppercase tracking-[0.16em] transition-all duration-300 flex items-center gap-2 group">
+              <span>Explore Spaces</span>
+              <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            
+            <a href="#materiality" class="px-5 py-3 rounded-full border border-stone-300 hover:border-stone-800 text-stone-800 text-xs uppercase tracking-[0.16em] transition-all">
+              Material Palette
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Artscape (SVG Craft & Architecture Composition) -->
+      <div class="mt-16 md:mt-24 rounded-2xl bg-[#EFEBE1] border border-black/[0.08] overflow-hidden p-6 md:p-12 relative shadow-inner">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          
+          <!-- Column 1: Shoji & Timber Elevation -->
+          <div class="space-y-4">
+            <div class="h-56 bg-[#FAF8F5] rounded-xl p-5 border border-stone-300/40 flex flex-col justify-between relative overflow-hidden group">
+              <!-- Geometric Wood Joinery illustration -->
+              <svg class="w-full h-32 text-stone-700/70" viewBox="0 0 240 120" fill="none" stroke="currentColor">
+                <rect x="20" y="20" width="200" height="80" rx="2" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="20" y1="60" x2="220" y2="60" stroke-width="1.2"/>
+                <line x1="86" y1="20" x2="86" y2="100" stroke-width="1.2"/>
+                <line x1="154" y1="20" x2="154" y2="100" stroke-width="1.2"/>
+                <circle cx="86" cy="60" r="3.5" fill="#B65B44"/>
+                <circle cx="154" cy="60" r="3.5" fill="#4E5D4E"/>
+                <path d="M40 85 Q120 70 200 85" stroke="#C0864B" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <div class="flex items-center justify-between text-[11px] tracking-widest text-stone-500 uppercase">
+                <span>01. Kanawa-Tsugi</span>
+                <span class="text-stone-700 font-mono">Joinery without nails</span>
+              </div>
+            </div>
+            <p class="text-xs text-stone-500 leading-relaxed">
+              Centuries-old Japanese carpentry joins kiln-dried Nordic white pine. Elastic, eternal, and living.
+            </p>
+          </div>
+
+          <!-- Column 2: Central Focal Piece (Ensō & Teaware) -->
+          <div class="flex flex-col items-center justify-center py-6 text-center">
+            <div class="relative w-44 h-44 flex items-center justify-center">
+              <!-- Ensō circle SVG with slow rotation -->
+              <svg class="w-full h-full text-stone-800 animate-breath" viewBox="0 0 160 160" fill="none">
+                <path d="M80 18 C115 18, 142 45, 142 80 C142 115, 115 142, 80 142 C45 142, 18 115, 18 80 C18 52, 38 28, 65 20" 
+                      stroke="#2B2A28" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="12"/>
+                <!-- Tea bowl silhouette inside -->
+                <path d="M52 95 C52 110, 108 110, 108 95 L114 74 C114 72, 46 72, 46 74 Z" fill="#C0864B" opacity="0.85"/>
+                <circle cx="80" cy="55" r="3" fill="#B65B44"/>
+              </svg>
+            </div>
+            <span class="font-serif-japandi italic text-lg text-stone-800 mt-3">"Nothing is finished. Nothing is perfect."</span>
+            <span class="text-[10px] tracking-[0.2em] uppercase text-stone-500 mt-1">The Essence of Wabi-Sabi</span>
+          </div>
+
+          <!-- Column 3: Natural Light & Nordic Hearth -->
+          <div class="space-y-4">
+            <div class="h-56 bg-[#FAF8F5] rounded-xl p-5 border border-stone-300/40 flex flex-col justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-[#FAF0E6] flex items-center justify-center border border-[#C0864B]/30">
+                  <svg class="w-5 h-5 text-[#B65B44]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs uppercase tracking-wider text-stone-800 font-medium">Nordic Hygge Warmth</div>
+                  <div class="text-[11px] text-stone-500">Filtered Solar Geometry</div>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between text-[11px] text-stone-600">
+                  <span>Daylight Diffusion</span>
+                  <span class="font-mono text-stone-800">92%</span>
+                </div>
+                <div class="w-full bg-stone-200 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-[#4E5D4E] h-full w-[92%] rounded-full"></div>
+                </div>
+              </div>
+              <div class="text-[11px] tracking-widest uppercase text-stone-400 text-right">
+                Shoji Screen Lux Balance
+              </div>
+            </div>
+            <p class="text-xs text-stone-500 leading-relaxed">
+              Every window is framed like a landscape painting; daylight enters soft, warm, and low on the horizon.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Ambient Data Strip -->
+        <div class="mt-8 pt-6 border-t border-stone-300/50 flex flex-wrap items-center justify-between gap-4 text-xs text-stone-600 font-light">
+          <div class="flex items-center gap-6">
+            <span><strong>Kyoto Studio:</strong> 35.0116° N, 135.7681° E</span>
+            <span class="hidden sm:inline text-stone-300">|</span>
+            <span><strong>Copenhagen Studio:</strong> 55.6761° N, 12.5683° E</span>
+          </div>
+          <div class="flex items-center gap-2 text-stone-500">
+            <span class="w-2 h-2 rounded-full bg-[#4E5D4E]"></span>
+            <span>Natural FSC Timber & Ceramic Atelier</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2: PHILOSOPHY & EMOTIONAL EQUILIBRIUM -->
+  <section id="philosophy" class="py-24 md:py-36 px-6 lg:px-12 bg-[#FAF8F5] border-b border-black/[0.05]">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-2xl mx-auto mb-20">
+        <span class="text-[11px] uppercase tracking-[0.28em] text-[#B65B44] font-medium">The Harmonic Convergence</span>
+        <h2 class="font-serif-japandi text-3xl sm:text-5xl font-light text-stone-900 mt-3 leading-tight">
+          Where Japanese Stillness Meets Scandinavian Hearth
+        </h2>
+        <div class="w-12 h-[1px] bg-stone-300 mx-auto my-6"></div>
+        <p class="text-sm md:text-base text-stone-600 font-light leading-relaxed">
+          Both cultures share a profound respect for authentic materials, unpretentious simplicity, and the sanctity of the domestic sanctuary. We do not design for prestige; we craft spaces that lower the pulse.
+        </p>
+      </div>
+
+      <!-- Comparison / Harmony Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        
+        <!-- Card 1: Wabi-Sabi -->
+        <div class="tactile-card rounded-2xl p-8 lg:p-12 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-8">
+            <span class="text-3xl font-serif-japandi text-stone-400">侘寂</span>
+            <span class="px-3 py-1 rounded-full bg-stone-100 text-[10px] tracking-[0.2em] uppercase text-stone-600 border border-stone-200">Japanese Spirit</span>
+          </div>
+          <h3 class="font-serif-japandi text-2xl md:text-3xl text-stone-900 mb-4 font-normal">
+            Wabi-Sabi: The Honor of Time & Patina
+          </h3>
+          <p class="text-stone-600 text-sm leading-relaxed mb-6 font-light">
+            Finding transcendent beauty in the asymmetric, the worn, and the fleeting. In our architecture, no timber is coated in synthetic plastics. The cedar weathers into silvery slate; the untreated brass darkens under human touch. Time is welcomed as the co-designer.
+          </p>
+          <ul class="space-y-3 text-xs text-stone-700">
+            <li class="flex items-center gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#B65B44]"></span>
+              <span><strong>Ma (間):</strong> The conscious negative space that allows thought to breathe.</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#B65B44]"></span>
+              <span><strong>Shizen (自然):</strong> Naturalness without pretense or forced symmetry.</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#B65B44]"></span>
+              <span><strong>Kanso (簡素):</strong> Purity through the elimination of the non-essential.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Hygge -->
+        <div class="tactile-card rounded-2xl p-8 lg:p-12 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-8">
+            <span class="text-3xl font-serif-japandi text-stone-400">Hygge</span>
+            <span class="px-3 py-1 rounded-full bg-stone-100 text-[10px] tracking-[0.2em] uppercase text-stone-600 border border-stone-200">Nordic Spirit</span>
+          </div>
+          <h3 class="font-serif-japandi text-2xl md:text-3xl text-stone-900 mb-4 font-normal">
+            Hygge: The Intimacy of Light & Sanctuary
+          </h3>
+          <p class="text-stone-600 text-sm leading-relaxed mb-6 font-light">
+            A devotion to soulful comfort, tactile coziness, and the communal warmth of fireside presence. In northern latitudes where winter nights are long, the home must be an emotional fortress of gentleness, wrapped in wool, oiled oak, and soft ambient illumination.
+          </p>
+          <ul class="space-y-3 text-xs text-stone-700">
+            <li class="flex items-center gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#4E5D4E]"></span>
+              <span><strong>Lys (Light):</strong> Amber, layered low-level illumination rather than harsh overhead glare.</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#4E5D4E]"></span>
+              <span><strong>Varme (Warmth):</strong> Chunky woven wool, tactile stone stoves, and honest joinery.</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#4E5D4E]"></span>
+              <span><strong>Ro (Tranquility):</strong> Psychological safety through tactile domestic honesty.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Interactive Quote Banner -->
+      <div class="mt-12 rounded-xl bg-[#EFEBE1] p-8 md:p-10 border border-stone-300/40 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-5">
+          <div class="w-12 h-12 rounded-full bg-[#FAF8F5] flex items-center justify-center text-stone-700 border border-stone-300/60 flex-shrink-0">
+            <svg class="w-6 h-6 text-[#C0864B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          </div>
+          <div>
+            <h4 class="font-serif-japandi text-lg text-stone-900 font-medium">Bespoke Timber Joinery Without Nails</h4>
+            <p class="text-xs text-stone-600 font-light">Engineered to absorb seismic shifts and temperature oscillations gracefully across generations.</p>
+          </div>
+        </div>
+        <a href="#inquiry" class="text-xs tracking-[0.18em] uppercase font-medium text-stone-800 hover:text-[#B65B44] transition-colors whitespace-nowrap">
+          Learn Our Joinery Methods →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: ARCHITECTURAL SANCTUARIES (SPACES) -->
+  <section id="sanctuaries" class="py-24 md:py-36 px-6 lg:px-12 bg-[#F7F4EE] border-b border-black/[0.05]">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <span class="text-[11px] uppercase tracking-[0.28em] text-[#4E5D4E] font-medium">Architectural Sanctuaries</span>
+          <h2 class="font-serif-japandi text-3xl sm:text-5xl font-light text-stone-900 mt-2">
+            Pavilions Born From Forest & Stone
+          </h2>
+        </div>
+        <p class="text-xs md:text-sm text-stone-500 max-w-md font-light leading-relaxed">
+          Modular, carbon-negative living sanctuaries pre-engineered in Denmark and joined on site with traditional Kyoto craftsmanship.
+        </p>
+      </div>
+
+      <!-- Spaces Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Space 1: The Kyoto Tea Retreat -->
+        <div class="tactile-card rounded-2xl overflow-hidden group flex flex-col justify-between">
+          <div class="h-64 bg-[#EFEBE1] relative p-6 flex flex-col justify-between overflow-hidden">
+            <!-- Architectural Vector Sketch -->
+            <svg class="absolute inset-0 w-full h-full opacity-60 group-hover:scale-105 transition-transform duration-700" viewBox="0 0 400 240" fill="none">
+              <!-- Pavilion roofline -->
+              <path d="M40 90 L200 45 L360 90 L340 98 L200 60 L60 98 Z" fill="#2B2A28"/>
+              <!-- Pillars -->
+              <rect x="70" y="98" width="8" height="110" fill="#9E7B56"/>
+              <rect x="130" y="98" width="6" height="110" fill="#9E7B56"/>
+              <rect x="200" y="60" width="8" height="148" fill="#9E7B56"/>
+              <rect x="270" y="98" width="6" height="110" fill="#9E7B56"/>
+              <rect x="330" y="98" width="8" height="110" fill="#9E7B56"/>
+              <!-- Tatami platform -->
+              <rect x="50" y="198" width="310" height="16" rx="2" fill="#E2DBD0" stroke="#8C877D"/>
+              <!-- Garden Stones -->
+              <ellipse cx="120" cy="225" rx="18" ry="7" fill="#68645D"/>
+              <ellipse cx="260" cy="226" rx="24" ry="8" fill="#5C5850"/>
+            </svg>
+            <div class="relative z-10 flex justify-between items-start">
+              <span class="px-2.5 py-1 rounded-full bg-stone-900/80 text-[#F7F4EE] text-[9px] uppercase tracking-[0.2em]">Model 01</span>
+              <span class="text-xs font-mono text-stone-600 bg-white/80 px-2 py-0.5 rounded">48 m²</span>
+            </div>
+            <div class="relative z-10">
+              <span class="text-[10px] tracking-[0.2em] uppercase text-stone-500 font-mono">Tatami & Cedar</span>
+            </div>
+          </div>
+
+          <div class="p-8">
+            <h3 class="font-serif-japandi text-2xl text-stone-900 mb-2 font-normal">
+              The Chashitsu Pavilion
+            </h3>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+              A contemplative courtyard retreat designed for tea ceremonies, writing, and mindful seclusion. Features raw cedar columns and floor-to-ceiling shoji screens opening onto a moss garden.
+            </p>
+            <div class="pt-4 border-t border-stone-200/60 flex items-center justify-between text-xs">
+              <span class="text-stone-500 font-light">Timber: Charred Yakisugi & Hinoki</span>
+              <a href="#inquiry" class="text-stone-900 font-medium hover:text-[#B65B44] transition-colors">Specifications →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 2: The Fjord Atelier -->
+        <div class="tactile-card rounded-2xl overflow-hidden group flex flex-col justify-between">
+          <div class="h-64 bg-[#E8E4DB] relative p-6 flex flex-col justify-between overflow-hidden">
+            <!-- Architectural Vector Sketch -->
+            <svg class="absolute inset-0 w-full h-full opacity-60 group-hover:scale-105 transition-transform duration-700" viewBox="0 0 400 240" fill="none">
+              <!-- Nordic pitched roof cabin -->
+              <path d="M100 200 L200 40 L300 200 Z" fill="#3D4A56" opacity="0.85"/>
+              <path d="M125 190 L200 70 L275 190 Z" fill="#F7F4EE"/>
+              <!-- Hearth chimney -->
+              <rect x="235" y="45" width="14" height="40" fill="#2B2A28"/>
+              <!-- Birch trees backdrop -->
+              <line x1="60" y1="220" x2="60" y2="70" stroke="#8C877D" stroke-width="2"/>
+              <line x1="80" y1="220" x2="80" y2="90" stroke="#8C877D" stroke-width="1.5"/>
+              <line x1="330" y1="220" x2="330" y2="60" stroke="#8C877D" stroke-width="2"/>
+            </svg>
+            <div class="relative z-10 flex justify-between items-start">
+              <span class="px-2.5 py-1 rounded-full bg-[#B65B44] text-[#F7F4EE] text-[9px] uppercase tracking-[0.2em]">Flagship</span>
+              <span class="text-xs font-mono text-stone-600 bg-white/80 px-2 py-0.5 rounded">95 m²</span>
+            </div>
+            <div class="relative z-10">
+              <span class="text-[10px] tracking-[0.2em] uppercase text-stone-500 font-mono">Danish Oak & Granite</span>
+            </div>
+          </div>
+
+          <div class="p-8">
+            <h3 class="font-serif-japandi text-2xl text-stone-900 mb-2 font-normal">
+              The Fjord Sanctuary
+            </h3>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+              An all-season residence embracing Nordic thermal efficiency. An open-plan hearth room surrounded by oiled oak panels and integrated floor level tatami bays for panoramic nature viewing.
+            </p>
+            <div class="pt-4 border-t border-stone-200/60 flex items-center justify-between text-xs">
+              <span class="text-stone-500 font-light">Timber: White Oiled Danish Oak</span>
+              <a href="#inquiry" class="text-stone-900 font-medium hover:text-[#B65B44] transition-colors">Specifications →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 3: The Engawa Studio -->
+        <div class="tactile-card rounded-2xl overflow-hidden group flex flex-col justify-between">
+          <div class="h-64 bg-[#E5E9E4] relative p-6 flex flex-col justify-between overflow-hidden">
+            <!-- Architectural Vector Sketch -->
+            <svg class="absolute inset-0 w-full h-full opacity-60 group-hover:scale-105 transition-transform duration-700" viewBox="0 0 400 240" fill="none">
+              <!-- Engawa wrap-around porch -->
+              <rect x="50" y="80" width="280" height="100" rx="3" fill="#D8DFC8" stroke="#4E5D4E"/>
+              <line x1="50" y1="140" x2="330" y2="140" stroke="#4E5D4E" stroke-width="1.5"/>
+              <rect x="80" y="95" width="60" height="45" fill="#FAF8F5" stroke="#4E5D4E"/>
+              <rect x="160" y="95" width="60" height="45" fill="#FAF8F5" stroke="#4E5D4E"/>
+              <rect x="240" y="95" width="60" height="45" fill="#FAF8F5" stroke="#4E5D4E"/>
+              <!-- Pine branches silhouette -->
+              <path d="M330 40 Q300 70 360 80 Q320 95 380 110" stroke="#4E5D4E" stroke-width="2" fill="none"/>
+            </svg>
+            <div class="relative z-10 flex justify-between items-start">
+              <span class="px-2.5 py-1 rounded-full bg-stone-900/80 text-[#F7F4EE] text-[9px] uppercase tracking-[0.2em]">Model 03</span>
+              <span class="text-xs font-mono text-stone-600 bg-white/80 px-2 py-0.5 rounded">62 m²</span>
+            </div>
+            <div class="relative z-10">
+              <span class="text-[10px] tracking-[0.2em] uppercase text-stone-500 font-mono">Pine & Washi Paper</span>
+            </div>
+          </div>
+
+          <div class="p-8">
+            <h3 class="font-serif-japandi text-2xl text-stone-900 mb-2 font-normal">
+              The Engawa Studio
+            </h3>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+              Defined by the classic Japanese "Engawa"—the covered perimeter veranda that seamlessly blurs the boundary between interior safety and wild forest environment.
+            </p>
+            <div class="pt-4 border-t border-stone-200/60 flex items-center justify-between text-xs">
+              <span class="text-stone-500 font-light">Timber: Untreated Nordic Pine</span>
+              <a href="#inquiry" class="text-stone-900 font-medium hover:text-[#B65B44] transition-colors">Specifications →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4: TACTILE LIVING OBJECTS -->
+  <section id="objects" class="py-24 md:py-36 px-6 lg:px-12 bg-[#FAF8F5] border-b border-black/[0.05]">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <span class="text-[11px] uppercase tracking-[0.28em] text-[#C0864B] font-medium">Bespoke Curation</span>
+        <h2 class="font-serif-japandi text-3xl sm:text-5xl font-light text-stone-900 mt-2">
+          Living Artifacts
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-500 font-light mt-4">
+          Objects created slowly by master hands. Ceramic, paper, timber, and linen that age gracefully alongside their owner.
+        </p>
+      </div>
+
+      <!-- Objects Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Object 1: Washi Akari Lamp -->
+        <div class="tactile-card rounded-2xl p-6 group cursor-pointer" onclick="inspectObject('washi')">
+          <div class="h-52 bg-[#F3EFE6] rounded-xl flex items-center justify-center p-4 relative overflow-hidden mb-6">
+            <!-- Lamp SVG -->
+            <svg class="w-28 h-36 text-stone-800 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 160" fill="none">
+              <!-- Bamboo frame -->
+              <ellipse cx="60" cy="80" rx="38" ry="52" fill="#FAF8F5" stroke="#C0864B" stroke-width="1.5"/>
+              <line x1="60" y1="28" x2="60" y2="132" stroke="#C0864B" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <ellipse cx="60" cy="55" rx="32" ry="12" stroke="#C0864B" stroke-width="0.8"/>
+              <ellipse cx="60" cy="80" rx="38" ry="14" stroke="#C0864B" stroke-width="0.8"/>
+              <ellipse cx="60" cy="105" rx="32" ry="12" stroke="#C0864B" stroke-width="0.8"/>
+              <!-- Tripod wire legs -->
+              <line x1="38" y1="125" x2="25" y2="155" stroke="#2B2A28" stroke-width="1.5"/>
+              <line x1="82" y1="125" x2="95" y2="155" stroke="#2B2A28" stroke-width="1.5"/>
+              <line x1="60" y1="132" x2="60" y2="158" stroke="#2B2A28" stroke-width="1.5"/>
+            </svg>
+            <span class="absolute top-3 right-3 text-[9px] uppercase tracking-wider text-stone-500 font-mono">01 / Lamp</span>
+          </div>
+          <h4 class="font-serif-japandi text-xl text-stone-900 font-normal">Kumo Mulberry Lantern</h4>
+          <p class="text-xs text-stone-500 font-light mt-1 mb-4">Gifu handmade washi paper with black iron tripod base.</p>
+          <div class="flex items-center justify-between text-xs pt-3 border-t border-stone-200">
+            <span class="font-mono text-stone-800">¥42,000 / €280</span>
+            <span class="text-[#B65B44] text-[11px] font-medium tracking-wider uppercase group-hover:translate-x-1 transition-transform">Inspect →</span>
+          </div>
+        </div>
+
+        <!-- Object 2: Bizen Stoneware Vessel -->
+        <div class="tactile-card rounded-2xl p-6 group cursor-pointer" onclick="inspectObject('stoneware')">
+          <div class="h-52 bg-[#EAE5DC] rounded-xl flex items-center justify-center p-4 relative overflow-hidden mb-6">
+            <!-- Stoneware Vase SVG -->
+            <svg class="w-28 h-36 text-stone-800 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 160" fill="none">
+              <!-- Organic hand-thrown pot -->
+              <path d="M46 35 L74 35 L70 50 C92 70, 96 115, 75 138 L45 138 C24 115, 28 70, 50 50 Z" fill="#9E7B56" stroke="#7A5A38" stroke-width="1.5"/>
+              <!-- Natural Wood-ash drip effect -->
+              <path d="M50 50 Q65 75 60 95 Q75 110 70 135" stroke="#B65B44" stroke-width="2" stroke-linecap="round"/>
+              <path d="M58 55 Q50 80 54 110" stroke="#FAF8F5" stroke-width="1.2" opacity="0.6"/>
+            </svg>
+            <span class="absolute top-3 right-3 text-[9px] uppercase tracking-wider text-stone-500 font-mono">02 / Ceramic</span>
+          </div>
+          <h4 class="font-serif-japandi text-xl text-stone-900 font-normal">Yugen Wood-Fired Vessel</h4>
+          <p class="text-xs text-stone-500 font-light mt-1 mb-4">Wood-fired for 14 days in Okayama without artificial glaze.</p>
+          <div class="flex items-center justify-between text-xs pt-3 border-t border-stone-200">
+            <span class="font-mono text-stone-800">¥58,000 / €390</span>
+            <span class="text-[#B65B44] text-[11px] font-medium tracking-wider uppercase group-hover:translate-x-1 transition-transform">Inspect →</span>
+          </div>
+        </div>
+
+        <!-- Object 3: Oiled Ash Low Stool -->
+        <div class="tactile-card rounded-2xl p-6 group cursor-pointer" onclick="inspectObject('ash')">
+          <div class="h-52 bg-[#ECE8E0] rounded-xl flex items-center justify-center p-4 relative overflow-hidden mb-6">
+            <!-- Ash Stool SVG -->
+            <svg class="w-32 h-36 text-stone-800 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 140 160" fill="none">
+              <!-- Curved organic seat -->
+              <ellipse cx="70" cy="65" rx="55" ry="16" fill="#D4A373" stroke="#9E7B56" stroke-width="1.5"/>
+              <!-- Legs with mortise joinery -->
+              <line x1="35" y1="75" x2="22" y2="140" stroke="#9E7B56" stroke-width="4" stroke-linecap="round"/>
+              <line x1="105" y1="75" x2="118" y2="140" stroke="#9E7B56" stroke-width="4" stroke-linecap="round"/>
+              <line x1="70" y1="80" x2="70" y2="145" stroke="#9E7B56" stroke-width="4" stroke-linecap="round"/>
+              <line x1="30" y1="120" x2="110" y2="120" stroke="#9E7B56" stroke-width="2"/>
+            </svg>
+            <span class="absolute top-3 right-3 text-[9px] uppercase tracking-wider text-stone-500 font-mono">03 / Furniture</span>
+          </div>
+          <h4 class="font-serif-japandi text-xl text-stone-900 font-normal">Skov & Take Stool</h4>
+          <p class="text-xs text-stone-500 font-light mt-1 mb-4">Solid Danish ash with hand-scraped curved contouring.</p>
+          <div class="flex items-center justify-between text-xs pt-3 border-t border-stone-200">
+            <span class="font-mono text-stone-800">¥74,000 / €490</span>
+            <span class="text-[#B65B44] text-[11px] font-medium tracking-wider uppercase group-hover:translate-x-1 transition-transform">Inspect →</span>
+          </div>
+        </div>
+
+        <!-- Object 4: Raw Flax Linen Throw -->
+        <div class="tactile-card rounded-2xl p-6 group cursor-pointer" onclick="inspectObject('linen')">
+          <div class="h-52 bg-[#E3E7E4] rounded-xl flex items-center justify-center p-4 relative overflow-hidden mb-6">
+            <!-- Linen Textile SVG -->
+            <svg class="w-32 h-36 text-stone-800 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 140 160" fill="none">
+              <!-- Draped folds -->
+              <path d="M25 40 Q70 25 115 40 L110 135 Q70 120 25 135 Z" fill="#EFECE4" stroke="#8C877D" stroke-width="1.2"/>
+              <path d="M35 55 Q70 70 105 55" stroke="#4E5D4E" stroke-width="1.5" fill="none"/>
+              <path d="M30 80 Q70 95 100 80" stroke="#B65B44" stroke-width="1" stroke-dasharray="3 3"/>
+              <path d="M35 105 Q70 120 105 105" stroke="#4E5D4E" stroke-width="1.2" fill="none"/>
+            </svg>
+            <span class="absolute top-3 right-3 text-[9px] uppercase tracking-wider text-stone-500 font-mono">04 / Textile</span>
+          </div>
+          <h4 class="font-serif-japandi text-xl text-stone-900 font-normal">Gotland Raw Flax Throw</h4>
+          <p class="text-xs text-stone-500 font-light mt-1 mb-4">Unbleached Swedish linen dyed with natural indigo and tea leaf.</p>
+          <div class="flex items-center justify-between text-xs pt-3 border-t border-stone-200">
+            <span class="font-mono text-stone-800">¥36,000 / €240</span>
+            <span class="text-[#B65B44] text-[11px] font-medium tracking-wider uppercase group-hover:translate-x-1 transition-transform">Inspect →</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Interactive Object Inspector Drawer (Modal preview) -->
+      <div id="inspector-modal" class="hidden mt-8 p-6 md:p-8 rounded-2xl bg-[#EFEBE1] border border-stone-300 transition-all">
+        <div class="flex flex-col md:flex-row items-start justify-between gap-6">
+          <div>
+            <div class="text-[10px] tracking-[0.2em] uppercase text-[#B65B44] font-medium mb-1" id="inspect-category">Object Study</div>
+            <h3 class="font-serif-japandi text-2xl text-stone-900" id="inspect-title">Selected Artifact</h3>
+            <p class="text-xs text-stone-600 font-light mt-2 max-w-2xl leading-relaxed" id="inspect-description">
+              Select any living object above to examine its material ancestry, sensory resonance, and craft provenance.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="closeInspector()" class="px-4 py-2 rounded-full border border-stone-300 text-xs text-stone-700 hover:bg-stone-200 transition-colors">
+              Close Details
+            </button>
+            <a href="#inquiry" class="px-5 py-2 rounded-full bg-stone-900 text-[#F7F4EE] text-xs uppercase tracking-wider hover:bg-[#B65B44] transition-colors">
+              Request Piece
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5: MATERIALITY & CRAFTSMANSHIP PALETTE -->
+  <section id="materiality" class="py-24 md:py-36 px-6 lg:px-12 bg-[#F7F4EE] border-b border-black/[0.05]">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-[11px] uppercase tracking-[0.28em] text-[#B65B44] font-medium">Sensory Materiality</span>
+          <h2 class="font-serif-japandi text-3xl sm:text-5xl font-light text-stone-900 leading-tight">
+            Materials that breath, age, and remember.
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 font-light leading-relaxed">
+            In our tactile ethos, the surface must never be cold, synthetic, or inert. We orchestrate raw materials that respond to light, tactile moisture, and room acoustics.
+          </p>
+          
+          <!-- Interactive Material Selector buttons -->
+          <div class="space-y-3 pt-2">
+            <button onclick="selectMaterial('hinoki')" class="material-btn w-full text-left p-4 rounded-xl border border-stone-300 bg-white/70 hover:bg-white flex items-center justify-between transition-all" data-material="hinoki">
+              <div class="flex items-center gap-3">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#E5D7C3] border border-stone-400"></span>
+                <div>
+                  <div class="text-xs font-medium text-stone-900">Untreated Kiso Hinoki Cypress</div>
+                  <div class="text-[10px] text-stone-500">Natural scent, antimicrobial, silken grain</div>
+                </div>
+              </div>
+              <span class="text-stone-400 text-xs">01</span>
+            </button>
+
+            <button onclick="selectMaterial('yakisugi')" class="material-btn w-full text-left p-4 rounded-xl border border-stone-300 bg-white/70 hover:bg-white flex items-center justify-between transition-all" data-material="yakisugi">
+              <div class="flex items-center gap-3">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#2B2A28]"></span>
+                <div>
+                  <div class="text-xs font-medium text-stone-900">Charred Yakisugi Cedar</div>
+                  <div class="text-[10px] text-stone-500">Fire-hardened, deep crocodile charcoal texture</div>
+                </div>
+              </div>
+              <span class="text-stone-400 text-xs">02</span>
+            </button>
+
+            <button onclick="selectMaterial('danish-oak')" class="material-btn w-full text-left p-4 rounded-xl border border-stone-300 bg-white/70 hover:bg-white flex items-center justify-between transition-all" data-material="danish-oak">
+              <div class="flex items-center gap-3">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#C2A385]"></span>
+                <div>
+                  <div class="text-xs font-medium text-stone-900">Danish White Oiled Oak</div>
+                  <div class="text-[10px] text-stone-500">Dense slow-growth rings, soft chalky matte finish</div>
+                </div>
+              </div>
+              <span class="text-stone-400 text-xs">03</span>
+            </button>
+
+            <button onclick="selectMaterial('washi')" class="material-btn w-full text-left p-4 rounded-xl border border-stone-300 bg-white/70 hover:bg-white flex items-center justify-between transition-all" data-material="washi">
+              <div class="flex items-center gap-3">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#FAF5E8] border border-stone-300"></span>
+                <div>
+                  <div class="text-xs font-medium text-stone-900">Raw Mulberry Washi Paper</div>
+                  <div class="text-[10px] text-stone-500">Hand-harvested kozo fibers, soft solar diffusion</div>
+                </div>
+              </div>
+              <span class="text-stone-400 text-xs">04</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Material Preview Stage -->
+        <div class="lg:col-span-7">
+          <div id="material-display-card" class="rounded-2xl bg-[#EFEBE1] border border-stone-300/80 p-8 md:p-12 relative overflow-hidden transition-all duration-500 min-h-[420px] flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span id="mat-kanji" class="font-serif-japandi text-5xl text-stone-400/80">檜</span>
+              <span id="mat-badge" class="px-3 py-1 rounded-full bg-stone-900 text-[#F7F4EE] text-[10px] uppercase tracking-[0.2em]">Sacred Wood</span>
+            </div>
+
+            <!-- Abstract texture representation -->
+            <div class="my-8 text-center">
+              <div id="mat-visual" class="w-32 h-32 mx-auto rounded-full bg-[#E5D7C3] shadow-md border-4 border-white/60 flex items-center justify-center transition-all duration-700">
+                <div class="w-16 h-16 rounded-full border border-stone-800/10 flex items-center justify-center">
+                  <div class="w-2 h-2 rounded-full bg-[#B65B44]"></div>
+                </div>
+              </div>
+              <h3 id="mat-name" class="font-serif-japandi text-2xl md:text-3xl text-stone-900 mt-5 font-normal">
+                Kiso Hinoki Cypress
+              </h3>
+              <p id="mat-quote" class="font-serif-japandi italic text-stone-600 text-base mt-2">
+                "Used for two millennia in Ise Jingu shrine; emits a restorative forest phytoncide aroma that steadies the breath."
+              </p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-stone-300/60 text-center text-xs">
+              <div>
+                <span class="text-stone-500 text-[10px] uppercase block tracking-wider">Hygro-Regulating</span>
+                <span id="mat-stat1" class="font-mono text-stone-800 font-medium">Optimal</span>
+              </div>
+              <div>
+                <span class="text-stone-500 text-[10px] uppercase block tracking-wider">Aroma Tone</span>
+                <span id="mat-stat2" class="font-mono text-stone-800 font-medium">Cedar & Citrus</span>
+              </div>
+              <div>
+                <span class="text-stone-500 text-[10px] uppercase block tracking-wider">Lifespan</span>
+                <span id="mat-stat3" class="font-mono text-stone-800 font-medium">300+ Years</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 6: CLIENT NARRATIVES & SPATIAL EXPERIENCES -->
+  <section id="dialogue" class="py-24 md:py-36 px-6 lg:px-12 bg-[#FAF8F5] border-b border-black/[0.05]">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <span class="text-[11px] uppercase tracking-[0.28em] text-[#4E5D4E] font-medium">Sensory Encounters</span>
+        <h2 class="font-serif-japandi text-3xl sm:text-5xl font-light text-stone-900 mt-2">
+          Living Within The Work
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="p-8 rounded-2xl bg-[#F7F4EE] border border-stone-200/80 flex flex-col justify-between">
+          <p class="font-serif-japandi italic text-stone-700 text-lg leading-relaxed mb-6">
+            "When I step inside our timber pavilion after hours in the city, the silence feels tangible. The light hits the cedar floor in soft amber bars, and my breath instantly slows."
+          </p>
+          <div class="pt-4 border-t border-stone-200 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#B65B44]/20 flex items-center justify-center text-[#B65B44] font-serif-japandi">
+              K
+            </div>
+            <div>
+              <div class="text-xs font-medium text-stone-900">Dr. Kenzo T.</div>
+              <div class="text-[10px] text-stone-500">Kyoto Tea Master & Author</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-[#F7F4EE] border border-stone-200/80 flex flex-col justify-between">
+          <p class="font-serif-japandi italic text-stone-700 text-lg leading-relaxed mb-6">
+            "There are no nails, no plastic caulking, no synthetic finishes. You smell genuine Danish oak and beeswax. It is the most honest building I have ever inhabited."
+          </p>
+          <div class="pt-4 border-t border-stone-200 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#4E5D4E]/20 flex items-center justify-center text-[#4E5D4E] font-serif-japandi">
+              A
+            </div>
+            <div>
+              <div class="text-xs font-medium text-stone-900">Astrid & Soren Lind</div>
+              <div class="text-[10px] text-stone-500">Architects, Aarhus</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-[#F7F4EE] border border-stone-200/80 flex flex-col justify-between">
+          <p class="font-serif-japandi italic text-stone-700 text-lg leading-relaxed mb-6">
+            "Our children sit on the floorboards with bare feet. We do not worry about a small nick in the wood; each scratch simply adds to the home's quiet soul."
+          </p>
+          <div class="pt-4 border-t border-stone-200 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#C0864B]/20 flex items-center justify-center text-[#C0864B] font-serif-japandi">
+              M
+            </div>
+            <div>
+              <div class="text-xs font-medium text-stone-900">Mira Chen-Bauer</div>
+              <div class="text-[10px] text-stone-500">Ceramicist, Bern</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 7: FINAL CALL TO ACTION & MINDFUL INQUIRY -->
+  <section id="inquiry" class="py-24 md:py-36 px-6 lg:px-12 bg-[#F7F4EE] shoji-grid relative">
+    <div class="max-w-4xl mx-auto">
+      
+      <div class="text-center mb-16">
+        <span class="text-[11px] uppercase tracking-[0.28em] text-[#B65B44] font-medium">The Threshold</span>
+        <h2 class="font-serif-japandi text-4xl sm:text-6xl font-light text-stone-900 mt-2">
+          Begin a Mindful Dialogue
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-600 font-light mt-4 max-w-lg mx-auto leading-relaxed">
+          Whether you envision a solitary garden pavilion, a complete architectural residence, or bespoke heirloom objects for your collection, we welcome your thoughts without haste.
+        </p>
+      </div>
+
+      <!-- Mindful Interactive Form -->
+      <div class="tactile-card rounded-3xl p-8 sm:p-12 max-w-2xl mx-auto bg-[#FAF8F5]">
+        
+        <form id="dialogue-form" onsubmit="handleInquirySubmit(event)" class="space-y-8">
+          
+          <!-- Step 1: Intention / Scope -->
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-stone-700 mb-3 font-medium">
+              1. What kind of sanctuary are you contemplating?
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <label class="flex items-center gap-2 p-3 rounded-xl border border-stone-300 text-xs cursor-pointer hover:bg-stone-50 transition-colors">
+                <input type="radio" name="scope" value="pavilion" class="text-stone-900 focus:ring-0" checked>
+                <span>Modular Pavilion</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 rounded-xl border border-stone-300 text-xs cursor-pointer hover:bg-stone-50 transition-colors">
+                <input type="radio" name="scope" value="residence" class="text-stone-900 focus:ring-0">
+                <span>Full Residence</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 rounded-xl border border-stone-300 text-xs cursor-pointer hover:bg-stone-50 transition-colors">
+                <input type="radio" name="scope" value="objects" class="text-stone-900 focus:ring-0">
+                <span>Living Objects</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2: Location & Timing -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-stone-700 mb-2 font-medium">
+                Your Preferred Name
+              </label>
+              <input type="text" required placeholder="e.g. Elena Vance" class="w-full px-4 py-3 rounded-xl border border-stone-300 bg-white/70 focus:bg-white focus:outline-none focus:border-stone-800 text-xs transition-colors">
+            </div>
+
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-stone-700 mb-2 font-medium">
+                Email Address
+              </label>
+              <input type="email" required placeholder="elena@sanctuary.studio" class="w-full px-4 py-3 rounded-xl border border-stone-300 bg-white/70 focus:bg-white focus:outline-none focus:border-stone-800 text-xs transition-colors">
+            </div>
+          </div>
+
+          <!-- Step 3: Geographic context -->
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-stone-700 mb-2 font-medium">
+              Land Location or City
+            </label>
+            <input type="text" placeholder="e.g. Kyoto hills, Scottish Highlands, Northern California coast" class="w-full px-4 py-3 rounded-xl border border-stone-300 bg-white/70 focus:bg-white focus:outline-none focus:border-stone-800 text-xs transition-colors">
+          </div>
+
+          <!-- Step 4: The Heart's Intent -->
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-stone-700 mb-2 font-medium">
+              The Atmosphere You Seek (Describe the feeling you wish to experience)
+            </label>
+            <textarea rows="3" placeholder="Tell us how you wish daylight to behave, the scents you enjoy, or how you spend your quietest morning hours..." class="w-full px-4 py-3 rounded-xl border border-stone-300 bg-white/70 focus:bg-white focus:outline-none focus:border-stone-800 text-xs transition-colors resize-none"></textarea>
+          </div>
+
+          <!-- Submission Button -->
+          <div class="pt-2">
+            <button type="submit" class="w-full py-4 rounded-full bg-stone-900 text-[#F7F4EE] hover:bg-[#B65B44] text-xs font-normal tracking-[0.2em] uppercase transition-all duration-300 shadow-md">
+              Send Mindful Inquiry
+            </button>
+            <p class="text-[10px] text-stone-400 text-center mt-3 font-light">
+              We respond personally within two solar cycles. No marketing automation.
+            </p>
+          </div>
+
+        </form>
+
+        <!-- Feedback Success State -->
+        <div id="form-success-message" class="hidden text-center py-8 space-y-4">
+          <div class="w-12 h-12 rounded-full bg-[#E5ECE4] text-[#4E5D4E] mx-auto flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="font-serif-japandi text-3xl text-stone-900">Your message has settled gently.</h3>
+          <p class="text-xs text-stone-600 font-light max-w-sm mx-auto leading-relaxed">
+            Our atelier directors in Kyoto and Copenhagen have received your inquiry. We look forward to discovering your sanctuary with you.
+          </p>
+          <button onclick="resetInquiryForm()" class="text-xs text-[#B65B44] hover:underline uppercase tracking-wider font-medium">
+            Send another reflection
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MINIMALIST FOOTER -->
+  <footer class="py-16 px-6 lg:px-12 bg-[#FAF8F5] border-t border-black/[0.06] text-stone-600 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-6 h-6 rounded-full border border-stone-800/30 flex items-center justify-center">
+          <div class="w-2 h-2 bg-[#B65B44] rounded-sm"></div>
+        </div>
+        <span class="font-serif-japandi text-lg tracking-[0.18em] uppercase text-stone-900 font-medium">Komorebi & Nord</span>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-8 text-[11px] tracking-widest uppercase text-stone-500 font-light">
+        <span>Kyoto Atelier: Higashiyama-ku</span>
+        <span class="hidden sm:inline">·</span>
+        <span>Copenhagen Studio: Bredgade 34</span>
+        <span class="hidden sm:inline">·</span>
+        <span>FSC Certified Timber</span>
+      </div>
+
+      <div class="text-[11px] text-stone-400">
+        © 2026 Komorebi & Nord. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT: Interactivity & Web Audio Synthesizer -->
+  <script>
+    // 1. Scroll Progress Indicator
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height);
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        indicator.style.transform = `scaleX(${scrolled})`;
+      }
+    });
+
+    // 2. Pure Web Audio API Ambient Sound Synthesizer (Bamboo Wind Chime & Zen Resonator)
+    let audioCtx = null;
+    let isPlaying = false;
+    let chimeInterval = null;
+
+    const audioToggleBtn = document.getElementById('audio-toggle-btn');
+    const audioBeacon = document.getElementById('audio-beacon');
+    const audioDot = document.getElementById('audio-dot');
+    const audioStatusLabel = document.getElementById('audio-status-label');
+
+    function playZenChime() {
+      if (!audioCtx) return;
+
+      // Pentatonic Japanese Insen / Hirajoshi scale frequencies (Hz)
+      const frequencies = [261.63, 277.18, 349.23, 392.00, 415.30, 523.25, 554.37, 698.46];
+      const freq = frequencies[Math.floor(Math.random() * frequencies.length)];
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      // Soft sine tone with organic bell harmonic
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      // Gentle bell envelope: instant gentle attack, long exponential decay
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 3.3);
+    }
+
+    if (audioToggleBtn) {
+      audioToggleBtn.addEventListener('click', () => {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        isPlaying = !isPlaying;
+
+        if (isPlaying) {
+          audioBeacon.classList.remove('hidden');
+          audioDot.classList.remove('bg-stone-400');
+          audioDot.classList.add('bg-[#4E5D4E]');
+          audioStatusLabel.textContent = 'Zen Chime: On';
+          playZenChime();
+          chimeInterval = setInterval(playZenChime, 4500);
+        } else {
+          audioBeacon.classList.add('hidden');
+          audioDot.classList.add('bg-stone-400');
+          audioDot.classList.remove('bg-[#4E5D4E]');
+          audioStatusLabel.textContent = 'Zen Chime: Off';
+          if (chimeInterval) clearInterval(chimeInterval);
+        }
+      });
+    }
+
+    // 3. Living Object Inspector Data
+    const objectDetails = {
+      'washi': {
+        category: 'Lighting / Papercraft',
+        title: 'Kumo Mulberry Lantern',
+        desc: 'Handmade by 8th-generation washi artisans in Gifu Prefecture. Thin kozo mulberry fibers filter raw bulb light into an ambient, diffused glow that mimics evening sun setting through autumn fog.'
+      },
+      'stoneware': {
+        category: 'Ceramics / Wabi-Sabi',
+        title: 'Yugen Wood-Fired Vessel',
+        desc: 'Crafted from coarse, unpurified Okayama mountain clay and fired in an ascending climbing kiln (Noborigama) for 14 continuous days. Fly ash naturally melts into an unpredictable golden-brown patina.'
+      },
+      'ash': {
+        category: 'Furniture / Woodcraft',
+        title: 'Skov & Take Low Stool',
+        desc: 'Sculpted from Danish ash sourced from certified sustainable Jutland forests. The dished seat is carved using traditional Japanese hand adzes and planed to a glass-smooth finish with natural tung oil.'
+      },
+      'linen': {
+        category: 'Textiles / Natural Dye',
+        title: 'Gotland Raw Flax Throw',
+        desc: 'Woven on vintage shuttle looms in Sweden with heavy, coarse unbleached flax yarn. Gently garment-washed with Kyoto well water to soften the drape while retaining deep tactile texture.'
+      }
+    };
+
+    function inspectObject(key) {
+      const data = objectDetails[key];
+      if (!data) return;
+      document.getElementById('inspect-category').textContent = data.category;
+      document.getElementById('inspect-title').textContent = data.title;
+      document.getElementById('inspect-description').textContent = data.desc;
+      const modal = document.getElementById('inspector-modal');
+      modal.classList.remove('hidden');
+      modal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function closeInspector() {
+      document.getElementById('inspector-modal').classList.add('hidden');
+    }
+
+    // 4. Materiality Interactive Showcase
+    const materialData = {
+      'hinoki': {
+        kanji: '檜',
+        badge: 'Sacred Timber',
+        name: 'Kiso Hinoki Cypress',
+        quote: '"Used for two millennia in Ise Jingu shrine; emits a restorative forest phytoncide aroma that steadies the breath."',
+        color: '#E5D7C3',
+        stat1: 'Optimal',
+        stat2: 'Cedar & Citrus',
+        stat3: '300+ Years'
+      },
+      'yakisugi': {
+        kanji: '焼杉',
+        badge: 'Carbon Surface',
+        name: 'Charred Yakisugi Cedar',
+        quote: '"Charred by open flame using traditional Japanese heat treatment; naturally resistant to fire, rot, and insects without chemical preservatives."',
+        color: '#2B2A28',
+        stat1: 'Weatherproof',
+        stat2: 'Charcoal & Earth',
+        stat3: '80+ Years'
+      },
+      'danish-oak': {
+        kanji: '樫',
+        badge: 'Nordic Hardwood',
+        name: 'Danish White Oiled Oak',
+        quote: '"Slow-growth rings formed during harsh Scandinavian winters create extraordinary density and fine silken wood grain."',
+        color: '#C2A385',
+        stat1: 'High Density',
+        stat2: 'Oat & Honey',
+        stat3: '200+ Years'
+      },
+      'washi': {
+        kanji: '和紙',
+        badge: 'Living Fiber',
+        name: 'Raw Mulberry Washi Paper',
+        quote: '"Interwoven plant fibers diffuse direct glare into a calm, unbroken blanket of ambient solar daylight."',
+        color: '#FAF5E8',
+        stat1: 'Breathable',
+        stat2: 'Neutral Plant',
+        stat3: '100+ Years'
+      }
+    };
+
+    function selectMaterial(key) {
+      const data = materialData[key];
+      if (!data) return;
+
+      document.getElementById('mat-kanji').textContent = data.kanji;
+      document.getElementById('mat-badge').textContent = data.badge;
+      document.getElementById('mat-name').textContent = data.name;
+      document.getElementById('mat-quote').textContent = data.quote;
+      document.getElementById('mat-visual').style.backgroundColor = data.color;
+      document.getElementById('mat-stat1').textContent = data.stat1;
+      document.getElementById('mat-stat2').textContent = data.stat2;
+      document.getElementById('mat-stat3').textContent = data.stat3;
+
+      // Update button highlights
+      document.querySelectorAll('.material-btn').forEach(btn => {
+        if (btn.getAttribute('data-material') === key) {
+          btn.classList.add('border-stone-800', 'bg-white', 'shadow-sm');
+          btn.classList.remove('border-stone-300', 'bg-white/70');
+        } else {
+          btn.classList.remove('border-stone-800', 'bg-white', 'shadow-sm');
+          btn.classList.add('border-stone-300', 'bg-white/70');
+        }
+      });
+    }
+
+    // 5. Mindful Inquiry Form Submission Handler
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      document.getElementById('dialogue-form').classList.add('hidden');
+      document.getElementById('form-success-message').classList.remove('hidden');
+    }
+
+    function resetInquiryForm() {
+      document.getElementById('dialogue-form').reset();
+      document.getElementById('dialogue-form').classList.remove('hidden');
+      document.getElementById('form-success-message').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
